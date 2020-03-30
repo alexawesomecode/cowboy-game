@@ -15,8 +15,8 @@
         mode: Phaser.Scale.FIT,
 
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 700,
-        height: 800,
+        width: 800,
+        height: 600,
         physics: {
             default: 'arcade',
             arcade: {
@@ -39,7 +39,7 @@
     var gameOver = false;
     let groupCowboys;
     let enemies;
-
+    let level = 0;
 
     function preload() {
         this.load.image('salon', './assets/salon2.jpg');
@@ -58,13 +58,15 @@
 
     function create() {
 
+
+
         platforms = this.physics.add.staticGroup();
 
-        platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        platforms.create(600, 400, 'ground');
-        platforms.create(50, 250, 'ground');
-        platforms.create(750, 220, 'ground');
 
+
+        platforms.create(600, 510, 'ground');
+        platforms.create(80, 310, 'ground');
+        this.add.image(400, 300, 'salon');
 
         this.anims.create({
             key: 'expl',
@@ -92,16 +94,13 @@
         bombs = this.physics.add.group();
 
 
-        var windowWidth = window.innerWidth;
-        var widnowHeight = window.innerHeight;
-        this.bg = this.add.image(windowWidth / 2, widnowHeight / 2, 'salon');
-        this.bg.setDisplaySize(windowWidth, widnowHeight);
+
 
         enemies = this.add.group()
         enemies = this.physics.add.group()
         enemies.enableBody = true;
 
-        for (let i = 0, c = 0; i < 5; i++) {
+        for (let i = 0, c = 0; i < 3; i++) {
             c += 150
 
             let b = enemies.create(c, 0, 'dude2')
@@ -119,7 +118,7 @@
 
         sprite.setDisplaySize(200, 200);
         sprite.setInteractive();
-        enemies.add(sprite)
+
         sprite.on('pointerdown', function(pointer) {
 
             if (pointer.isDown) {
@@ -161,10 +160,13 @@
     //
     function collisionHandler(bombs, badsscowboy) {
 
-        badsscowboy.disableBody(true, true);
+        badsscowboy.destroy();
 
     }
+    //
 
+
+    //
     function showExplosion(x, y) {
 
         bomb = bombs.create(x, y, 'bombExplosion');
@@ -190,22 +192,64 @@
             pointerIsFree = false;
         }
 
-
+        //
+        let that = this;
+        //
 
         this.physics.add.collider(bombs, enemies, collisionHandler, null, this);
 
-        if (enemies.countActive(true) < 3) {
+        function multipleEnemy(cloneEnem) {
+
+            let cloneNum = Math.ceil(level / 2);
+            let xs = Phaser.Math.Between(0, 100);
+            if ((level % 3 === 0) && (xs > 90)) {
+
+
+                let clones = enemies.create(cloneEnem.x, cloneEnem.y, 'dude2')
+                clones.setDisplaySize(150, 150)
+                xs += 100
+                clones.setVelocity(xs, -100);
+                clones.name = 'badsscowboy' + xs
+                clones.checkWorldBounds = true;
+                that.physics.add.collider(clones, platforms);
+
+
+            }
+        }
+        //
+        console.log(enemies.countActive())
+        if (enemies.countActive(true) < 2) {
             //  A new batch of stars to collect
-            for (let i = 0, c = 0; i < 5; i++) {
-                c += 150
+            level += 1
 
-                let b = enemies.create(c, 0, 'dude2')
 
-                b.setDisplaySize(150, 150)
-                b.name = 'badsscowboy' + i
-                b.checkWorldBounds = true;
-                this.physics.add.collider(b, platforms);
+            for (let i = 0, c = 100; i < 3; i++) {
 
+
+                let luckyFactor = Math.random();
+                c += Phaser.Math.Between(0, 100);
+
+
+
+                if (luckyFactor > 0.90) {
+
+                    if (level % 5 == 0) {
+                        enemies.children.iterate(function(child) {
+
+                            multipleEnemy(child)
+
+                        });
+                    }
+
+                    let b = enemies.create(c, 0, 'dude2')
+
+                    b.setDisplaySize(150, 150)
+                    b.name = 'badsscowboy' + i
+                    b.checkWorldBounds = true;
+                    this.physics.add.collider(b, platforms);
+
+
+                }
             }
 
         }
@@ -228,6 +272,6 @@
     ////
 
 
-    new Phaser.Game(config);
+    let game = new Phaser.Game(config);
 
     //
