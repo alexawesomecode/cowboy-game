@@ -42,13 +42,16 @@
     let enemies;
     let level = 0;
     let that;
+    //
 
     function preload() {
-        this.load.image('salon', './assets/salon2.jpg');
+        this.load.image('salon', './assets/transparent.png');
         this.load.image('dude1', 'assets/cowboy/sprite_05.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude2', 'assets/cowboy/sprite_06.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude3', 'assets/cowboy/sprite_07.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude4', 'assets/cowboy/sprite_08.png', { frameWidth: 32, frameHeight: 48 })
+
+        this.load.image('baddude-4-1', 'assets/cowboy/sprite_17.png', { frameWidth: 32, frameHeight: 48 })
 
         this.load.image('baddude-2-1', 'assets/cowboy/sprite_19.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('baddude-2-2', 'assets/cowboy/sprite_20.png', { frameWidth: 32, frameHeight: 48 })
@@ -70,6 +73,9 @@
         this.load.spritesheet('bombExplosion', 'assets/Explosion.png', { frameWidth: 96, frameHeight: 96 });
         this.load.image('ground', 'assets/platform.png');
 
+        this.load.image('king', 'assets/king.svg', { frameWidth: 32, frameHeight: 48 })
+
+
 
     }
 
@@ -77,12 +83,14 @@
 
     function create() {
 
-
-
         platforms = this.physics.add.staticGroup();
         platforms.create(600, 510, 'ground');
         platforms.create(80, 310, 'ground');
         this.add.image(400, 300, 'salon');
+
+        that = this;
+
+
         scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
 
         this.anims.create({
@@ -94,6 +102,14 @@
 
         });
 
+        this.anims.create({
+            key: 'blonde-princess',
+            frames: this.anims.generateFrameNumbers('princess', { start: 1, end: 12 }),
+            frameRate: 40,
+            killOnComplete: true,
+            msPerFrame: 400
+
+        });
 
         this.anims.create({
             key: 'explosion',
@@ -123,13 +139,15 @@
         });
 
         bombs = this.physics.add.group();
-        that = this;
-
-
-
-        const { robotsprite, dudesprite, dude3sprite, dude4sprite } = windowEnemies(that).createEnemies();
-        // setting score
+        //
+        const { robotsprite, dudesprite, dude3sprite, dude4sprite } = windowEnemies(that).createCharacters();
+        windowEnemies(that).createKing()
+            // setting score
         setScore([robotsprite, dudesprite, dude3sprite, dude4sprite])
+
+
+
+
 
 
     }
@@ -154,30 +172,6 @@
 
     }
 
-    function killCowboy(groupCowboy) {
-        groupCowboys.disableBody(true, true);
-        score += 10
-        if (groupCowboys.countActive(true) === 0) {
-            groupCowboys.children.iterate(function(child) {
-
-                child.enableBody(true, child.x, 0, true, true);
-
-            });
-        }
-
-    }
-
-
-
-    function getKilled(player) {
-        // player.setTint(0xff0000);
-
-        this.physics.pause();
-    }
-    //
-
-
-    //
     function showExplosion(x, y) {
 
         bomb = bombs.create(x, y, 'bombExplosion');
@@ -204,27 +198,7 @@
             pointerIsFree = false;
         }
 
-
-        //
-
     }
-
-
-    //
-
-    function hitBomb(player, bomb) {
-        this.physics.pause();
-
-        player.setTint(0xff0000);
-
-        //player.anims.play('turn');
-
-        gameOver = true;
-    }
-
-    ////
-
-
     let game = new Phaser.Game(config);
 
     //
