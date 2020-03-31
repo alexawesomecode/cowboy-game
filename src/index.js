@@ -1,4 +1,5 @@
     import 'phaser';
+    import windowEnemies from './Enemy'
     // todo: 
     // 1. set custom cursor
     // 2. on click make appear bomb explosion sprite
@@ -40,6 +41,7 @@
     let groupCowboys;
     let enemies;
     let level = 0;
+    let that;
 
     function preload() {
         this.load.image('salon', './assets/salon2.jpg');
@@ -47,6 +49,23 @@
         this.load.image('dude2', 'assets/cowboy/sprite_06.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude3', 'assets/cowboy/sprite_07.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude4', 'assets/cowboy/sprite_08.png', { frameWidth: 32, frameHeight: 48 })
+
+        this.load.image('baddude-2-1', 'assets/cowboy/sprite_19.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('baddude-2-2', 'assets/cowboy/sprite_20.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('baddude-2-3', 'assets/cowboy/sprite_21.png', { frameWidth: 32, frameHeight: 48 })
+
+
+        this.load.image('baddude-3-1', 'assets/cowboy/sprite_09.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('baddude-3-2', 'assets/cowboy/sprite_10.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('baddude-3-3', 'assets/cowboy/sprite_11.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('baddude-3-4', 'assets/cowboy/sprite_12.png', { frameWidth: 32, frameHeight: 48 })
+
+        this.load.image('robot-1', 'assets/cowboy/sprite_03.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('robot-2', 'assets/cowboy/sprite_04.png', { frameWidth: 32, frameHeight: 48 })
+
+        this.load.image('bird-1', 'assets/cowboy/sprite_25.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('bird-2', 'assets/cowboy/sprite_26.png', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('bird-3', 'assets/cowboy/sprite_27.png', { frameWidth: 32, frameHeight: 48 })
 
         this.load.spritesheet('bombExplosion', 'assets/Explosion.png', { frameWidth: 96, frameHeight: 96 });
         this.load.image('ground', 'assets/platform.png');
@@ -61,12 +80,10 @@
 
 
         platforms = this.physics.add.staticGroup();
-
-
-
         platforms.create(600, 510, 'ground');
         platforms.create(80, 310, 'ground');
         this.add.image(400, 300, 'salon');
+        scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
 
         this.anims.create({
             key: 'expl',
@@ -82,8 +99,9 @@
             key: 'explosion',
             frames: [
                 { key: 'dude1' },
-                { key: 'dude2' },
-                { key: 'dude1' }
+                { key: 'dude2' }
+
+
 
             ],
             frameRate: 10,
@@ -91,47 +109,32 @@
             yoyo: true
         });
 
-        bombs = this.physics.add.group();
+        this.anims.create({
+            key: 'robot',
+            frames: [
+                { key: 'robot-1' },
+                { key: 'robot-2' }
 
 
-
-
-        enemies = this.add.group()
-        enemies = this.physics.add.group()
-        enemies.enableBody = true;
-
-        for (let i = 0, c = 0; i < 3; i++) {
-            c += 150
-
-            let b = enemies.create(c, 0, 'dude2')
-
-            b.setDisplaySize(150, 150)
-            b.name = 'badsscowboy' + i
-            b.checkWorldBounds = true;
-            this.physics.add.collider(b, platforms);
-
-        }
-
-
-        var sprite = this.add.sprite(150, 150, 'dude1').play('explosion');
-
-
-        sprite.setDisplaySize(200, 200);
-        sprite.setInteractive();
-
-        sprite.on('pointerdown', function(pointer) {
-
-            if (pointer.isDown) {
-
-                console.log('downn');
-                sprite.destroy();
-            }
-
-
+            ],
+            frameRate: 2,
+            repeat: -1,
+            yoyo: true
         });
+
+        bombs = this.physics.add.group();
+        that = this;
+        console.log(that)
+        windowEnemies(that).createEnemies();
+
+
 
     }
 
+
+
+
+    //
 
 
     function killCowboy(groupCowboy) {
@@ -158,15 +161,6 @@
 
 
     //
-    function collisionHandler(bombs, badsscowboy) {
-
-        badsscowboy.destroy();
-
-    }
-    //
-
-
-    //
     function showExplosion(x, y) {
 
         bomb = bombs.create(x, y, 'bombExplosion');
@@ -178,81 +172,23 @@
 
 
 
+
     function update() {
         let pointerIsFree;
         let pointer = this.input.activePointer;
+        that = this;
+
         if (pointer.isDown) {
 
             let touchX = pointer.x;
             let touchY = pointer.y;
-
             showExplosion(touchX, touchY)
-
-
+            windowEnemies(that).checkEnemVisibility();
             pointerIsFree = false;
         }
 
+
         //
-        let that = this;
-        //
-
-        this.physics.add.collider(bombs, enemies, collisionHandler, null, this);
-
-        function multipleEnemy(cloneEnem) {
-
-            let cloneNum = Math.ceil(level / 2);
-            let xs = Phaser.Math.Between(0, 100);
-            if ((level % 3 === 0) && (xs > 90)) {
-
-
-                let clones = enemies.create(cloneEnem.x, cloneEnem.y, 'dude2')
-                clones.setDisplaySize(150, 150)
-                xs += 100
-                clones.setVelocity(xs, -100);
-                clones.name = 'badsscowboy' + xs
-                clones.checkWorldBounds = true;
-                that.physics.add.collider(clones, platforms);
-
-
-            }
-        }
-        //
-        console.log(enemies.countActive())
-        if (enemies.countActive(true) < 2) {
-            //  A new batch of stars to collect
-            level += 1
-
-
-            for (let i = 0, c = 100; i < 3; i++) {
-
-
-                let luckyFactor = Math.random();
-                c += Phaser.Math.Between(0, 100);
-
-
-
-                if (luckyFactor > 0.90) {
-
-                    if (level % 5 == 0) {
-                        enemies.children.iterate(function(child) {
-
-                            multipleEnemy(child)
-
-                        });
-                    }
-
-                    let b = enemies.create(c, 0, 'dude2')
-
-                    b.setDisplaySize(150, 150)
-                    b.name = 'badsscowboy' + i
-                    b.checkWorldBounds = true;
-                    this.physics.add.collider(b, platforms);
-
-
-                }
-            }
-
-        }
 
     }
 
