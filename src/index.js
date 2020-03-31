@@ -124,18 +124,35 @@
 
         bombs = this.physics.add.group();
         that = this;
-        console.log(that)
-        windowEnemies(that).createEnemies();
 
+
+
+        const { robotsprite, dudesprite, dude3sprite, dude4sprite } = windowEnemies(that).createEnemies();
+        // setting score
+        setScore([robotsprite, dudesprite, dude3sprite, dude4sprite])
 
 
     }
 
 
+    function setScore(arr) {
+
+        arr.forEach((enem) => {
+            console.log(enem)
+            enem.on('pointerdown', function(pointer) {
+                if (pointer.isDown) {
+                    score += 5
+                    scoreText.setText('Score: ' + score);
 
 
-    //
 
+                }
+            });
+
+
+        })
+
+    }
 
     function killCowboy(groupCowboy) {
         groupCowboys.disableBody(true, true);

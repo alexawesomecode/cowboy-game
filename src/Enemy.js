@@ -37,12 +37,14 @@ let windowEnemies = function(thats) {
 
             elem.on('pointerdown', function(pointer) {
                 if (pointer.isDown) {
-                    console.log('downn', elem.visible);
+
                     elem.visible = false;
-                    enemyScore += 5
+
                 }
             });
         })
+
+        return { robotsprite, dudesprite, dude3sprite, dude4sprite }
 
     }
 
