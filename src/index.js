@@ -1,6 +1,7 @@
     import 'phaser';
 //    import windowEnemies from './Enemy'
 import WelcomeScene from './WelcomeScene';
+import GameScene from '/GameScene';
 
     var config = {
         mode: Phaser.Scale.FIT,
@@ -15,7 +16,7 @@ import WelcomeScene from './WelcomeScene';
                 debug: false
             }
         },
-        scene: [WelcomeScene] 
+        scene: [WelcomeScene, GameScene] 
     };
 
     let game = new Phaser.Game(config);
