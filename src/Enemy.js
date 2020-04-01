@@ -94,18 +94,19 @@ let windowEnemies = function(thats) {
                 callKing()
             }
 
-
-
         } else {
 
             elem.visible = true;
             if (rand > 0.92) callKing();
         }
     }
-    //
-
+   
     function callKing() {
-
+	let xPosition = Phaser.Math.Between(100,700);
+	let yPosition = Phaser.Math.Between(50,550)
+	king.x = xPosition;
+	king.y = yPosition;
+	
         if (king.visible == false) king.visible = true;
         else { king.visible = false }
 
