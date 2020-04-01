@@ -1,0 +1,26 @@
+const callApi = () {
+
+    const newGame = () {
+	const gameName = { name: 'Shoting Cowboys - Save Playful King' }
+	const toPost = JSON.stringify(gameName);
+	const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games';
+	const configurations = {
+	    method: 'POST'
+	    headers: {
+		Accept: 'application/json',
+		Content-Type: 'application/json'},
+	    
+	      body: toPost
+	
+	}
+
+	const resp = await fetch(address, settings);
+	const result = await response.json();
+	return result
+	console.log(result)
+
+    }
+
+    return {newGame}
+
+}

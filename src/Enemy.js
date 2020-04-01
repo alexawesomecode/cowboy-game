@@ -4,7 +4,6 @@ let dudesprite;
 let dude3sprite;
 let dude4sprite;
 let dude2sprite;
-
 let king;
 
 let windowEnemies = function(thats) {
@@ -61,11 +60,11 @@ let windowEnemies = function(thats) {
         if (elem.texture.key === 'dude1') {
             if (dude4sprite.visible === false) {
 
-                elem.visible = true;
+                elem.visible = false;
 
             } else {
 
-                elem.visible = false;
+                elem.visible = true;
             }
 
         } else if (elem.texture.key === 'baddude-3-1') {
@@ -130,6 +129,18 @@ let windowEnemies = function(thats) {
     };
 
 
+    function overNextScene() {
+
+   	    console.log('gameover')
+	    that.scene.start('GameOverScene');
+    }
+
+    function gameOver() {
+
+	that.add.text(400, 300, "Game Over",  { font: "47px Arial", fill: '#ffffff', backgroundColor: '#000000' });
+	setTimeout(overNextScene, 2300);
+
+    }
     function createKing() {
 
         king = that.add.image(300, 200, 'king');
@@ -140,8 +151,9 @@ let windowEnemies = function(thats) {
             if (pointer.isDown) {
 
                 king.setTint(0xff0000);
-
-                //  that.physics.pause();
+		
+                that.scene.pause();
+		gameOver();
 
             }
         });

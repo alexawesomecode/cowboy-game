@@ -1,16 +1,25 @@
-    var platforms;
-    var score = 0;
-    var scoreText;
-    var bombs;
-    let bomb;
-    var gameOver = false;
-    let groupCowboys;
-    let enemies;
-    let level = 0;
-    let that;
-    
 
-    function preload() {
+import windowEnemies from './Enemy';
+
+       
+      let platforms;
+      let score = 0;
+      let scoreText;
+      let bombs;
+      let bomb;
+      let gameOver = false;
+let that;
+let rifle;
+let shotgun;
+let pistol;
+let blues;
+class GameScene extends Phaser.Scene {
+  constructor() {
+      super({ key: 'GameScene' });
+  }
+
+
+preload() {
        
         this.load.image('dude1', 'assets/cowboy/sprite_05.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude2', 'assets/cowboy/sprite_06.png', { frameWidth: 32, frameHeight: 48 })
@@ -32,22 +41,18 @@
         this.load.image('robot-1', 'assets/cowboy/sprite_03.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('robot-2', 'assets/cowboy/sprite_04.png', { frameWidth: 32, frameHeight: 48 })
 
-        this.load.image('bird-1', 'assets/cowboy/sprite_25.png', { frameWidth: 32, frameHeight: 48 })
-        this.load.image('bird-2', 'assets/cowboy/sprite_26.png', { frameWidth: 32, frameHeight: 48 })
-        this.load.image('bird-3', 'assets/cowboy/sprite_27.png', { frameWidth: 32, frameHeight: 48 })
-
         this.load.spritesheet('bombExplosion', 'assets/Explosion.png', { frameWidth: 96, frameHeight: 96 });
         this.load.image('ground', 'assets/platform.png');
  this.load.image('salon', './assets/transparent.png');
-        this.load.image('king', 'assets/king.svg', { frameWidth: 32, frameHeight: 48 })
+    this.load.image('king', 'assets/king.svg', { frameWidth: 32, frameHeight: 48 })
 
-
+  this.load.audio('blues', 'assets/blues.ogg');
+    this.load.audio('pistol', 'assets/pistol.wav');
+    this.load.audio('rifle', 'assets/rifle.wav');
+    this.load.audio('shotgun', 'assets/shotgun.wav');
 
     }
-
-
-
-    function create() {
+ create() {
 
         platforms = this.physics.add.staticGroup();
         platforms.create(600, 510, 'ground');
@@ -97,21 +102,22 @@
         });
 
         bombs = this.physics.add.group();
-        //
+
         const { robotsprite, dudesprite, dude3sprite, dude4sprite } = windowEnemies(that).createCharacters();
         windowEnemies(that).createKing()
-            // setting score
-        setScore([robotsprite, dudesprite, dude3sprite, dude4sprite])
 
+        this.setScore([robotsprite, dudesprite, dude3sprite, dude4sprite])
+     blues = this.sound.add('blues');
+     blues.play();
 
-
-
-
+     rifle = this.audio.add('rifle');
+     shotgun = this.audio.add('shotgun');
+     pistol = this.audio.add('pistol');
 
     }
 
 
-    function setScore(arr) {
+     setScore(arr) {
 
         arr.forEach((enem) => {
             console.log(enem)
@@ -130,19 +136,22 @@
 
     }
 
-    function showExplosion(x, y) {
+   showExplosion(x, y) {
 
+
+       const rand = Math.random();
         bomb = bombs.create(x, y, 'bombExplosion');
         bomb.setDisplaySize(65, 65);
-
-        bomb.anims.play('expl', true)
+       bomb.anims.play('expl', true)
+       if (rand < 0.21) rifle.play();
+       if (rand > 0.91) shotgun.play();
 
     }
 
 
 
 
-    function update() {
+ update() {
         let pointerIsFree;
         let pointer = this.input.activePointer;
         that = this;
@@ -151,9 +160,12 @@
 
             let touchX = pointer.x;
             let touchY = pointer.y;
-            showExplosion(touchX, touchY)
+            this.showExplosion(touchX, touchY)
             windowEnemies(that).checkEnemVisibility();
             pointerIsFree = false;
         }
 
-    }
+ }
+}
+export default GameScene;
+//
