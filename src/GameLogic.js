@@ -25,6 +25,9 @@ const Characters = function(thats) {
         dudesprite.setDisplaySize(160, 160);
         dudesprite.setInteractive();
 
+        dude2sprite.setDisplaySize(150, 150);
+        dude2sprite.setInteractive();
+
         dude3sprite.setDisplaySize(150, 150);
         dude3sprite.setInteractive();
 
@@ -33,8 +36,6 @@ const Characters = function(thats) {
         dude4sprite.setInteractive();
 
 
-        dude2sprite.setDisplaySize(150, 150);
-        dude2sprite.setInteractive();
 
         [robotsprite, dudesprite, dude3sprite, dude4sprite, dude2sprite].forEach((elem) => {
 
@@ -110,9 +111,8 @@ const Characters = function(thats) {
 
     function checkEnemVisibility() {
 
-
         [robotsprite, dude3sprite, dudesprite, dude4sprite].forEach((elem) => {
-            console.log(robotsprite)
+
             let rand = Math.random()
             if (rand > 0.7) {
                 if (elem.visible === false) {
@@ -128,7 +128,7 @@ const Characters = function(thats) {
 
     function overNextScene() {
 
-        console.log('gameover')
+
         that.scene.start('GameOverScene');
     }
 
@@ -142,14 +142,13 @@ const Characters = function(thats) {
     function createKing() {
 
         king = that.add.image(300, 200, 'king');
-        king.setDisplaySize(110, 110)
+        king.setDisplaySize(150, 150)
         king.setInteractive();
         king.visible = false;
         king.on('pointerdown', function(pointer) {
             if (pointer.isDown) {
 
                 king.setTint(0xff0000);
-
                 that.scene.pause();
                 gameOver();
 

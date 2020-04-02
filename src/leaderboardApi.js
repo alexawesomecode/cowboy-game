@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 const callApi = function() {
 
     const newGame = async() => {
@@ -20,9 +18,8 @@ const callApi = function() {
         const resp = await fetch(url, configurations)
 
         const result = await resp.json();
-        console.log(result);
         return result;
-        console.log(result)
+
 
     }
 
@@ -73,6 +70,5 @@ const callApi = function() {
     return { newGame, getScore, submitScore }
 
 }
-
 
 export default callApi;

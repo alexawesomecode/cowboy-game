@@ -1,5 +1,6 @@
-import GameScene from './GameScene';
+import callApi from './leaderboardApi.js'
 let rifle;
+
 class GameOverScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameOverScene' });
@@ -29,41 +30,18 @@ class GameOverScene extends Phaser.Scene {
 
     }
 
-    showExplosion(x, y) {
-        let bombs = this.physics.add.group()
-        let bomb = bombs.create(x, y, 'bombExplosion');
-        bomb.setDisplaySize(65, 65);
-
-        bomb.anims.play('expl', true)
-
-    }
 
     create() {
 
-        rifle = this.sound.add('rifle')
-        rifle.play();
-
         let that = this;
         let buttonTest = this.add.sprite(400, 300, 'testButton');
-        buttonTest.setDisplaySize(450, 100)
-        buttonTest.setInteractive();
-        buttonTest.on('pointerdown', function(pointer) {
-
-            if (pointer.isDown)
-                console.log('down');
-            rifle.play();
-            that.scene.start('LeaderBoardScene');
-
-        })
-
-        this.add.text(380, 280, "SUBMIT", { font: "36px Arial" })
-        let text = 'These were skilled cowboys, BUT... \n Your BRAVERY will be recompensated.\n Enter your name';
+        let text = 'These were skilled cowboys, BUT... \n Your BRAVERY will be recompensated.\n\n ';
         let welcomeGuy = this.add.sprite(300, 550, 'dude1');
-
+        let element = this.add.dom(300, 220).createFromCache('nameform');
         welcomeGuy.setDisplaySize(400, 400);
 
-
-        this.add.text(100, 100, text, { font: "27px Arial", fill: '#ffffff', backgroundColor: '#000000' });
+        rifle = this.sound.add('rifle')
+        rifle.play();
 
         this.anims.create({
             key: 'expl',
@@ -75,45 +53,29 @@ class GameOverScene extends Phaser.Scene {
         });
 
 
+        buttonTest.setDisplaySize(450, 100)
+        buttonTest.setInteractive();
+        buttonTest.on('pointerdown', function(pointer) {
 
-        var element = this.add.dom(400, 0).createFromCache('nameform');
-
-        element.addListener('click');
-
-        element.on('click', function(event) {
-
-            if (event.target.name === 'playButton') {
-                var inputText = this.getChildByName('nameField');
-
-
-                if (inputText.value !== '') {
-
-                    this.removeListener('click');
+            rifle.play();
+            let child = element.getChildByID('nameField')
+            let userName = child.value
+            that.scene.start('LeaderBoardScene');
+            userName !== '' ? callApi().submitScore(userName, 23) : callApi().submitScore('Anonymous', 2)
 
 
-                    this.setVisible(false);
+
+        })
+
+        this.add.text(350, 280, "SUBMIT", { font: "36px Arial" })
+        this.add.text(100, 100, text, { font: "27px Arial", fill: '#ffffff', backgroundColor: '#000000' });
 
 
-                    text.setText('Welcome ' + inputText.value);
-                }
-            }
-        });
     }
 
 
     update() {
 
-        let pointerIsFree;
-        let pointer = this.input.activePointer;
-
-
-        if (pointer.isDown) {
-            console.log(pointer.x)
-            let touchX = pointer.x;
-            let touchY = pointer.y;
-            this.showExplosion(touchX, touchY)
-            pointerIsFree = false;
-        }
     }
 
 }

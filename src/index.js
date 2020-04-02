@@ -3,7 +3,8 @@ import GameScene from './GameScene';
 import GameOverScene from './GameOverScene';
 import LeaderBoardScene from './LeaderBoardScene';
 var config = {
-    mode: Phaser.Scale.FIT,
+    type: Phaser.AUTO,
+    parent: 'divId',
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 800,
     height: 600,
@@ -13,11 +14,12 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
-            debug: false
+            gravity: { y: 300 }
+
         }
     },
-    scene: [GameScene, GameOverScene, LeaderBoardScene]
+    //scene: [GameScene, GameOverScene, LeaderBoardScene]
+    scene: [GameOverScene]
 };
 
 let game = new Phaser.Game(config);
