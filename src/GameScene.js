@@ -120,10 +120,8 @@ class GameScene extends Phaser.Scene {
             enem.on('pointerdown', function(pointer) {
                 if (pointer.isDown) {
                     score += 5
-                    GameLogic().savedScore(score)
+                    console.log(GameLogic().saveScore(score))
                     scoreText.setText('Score: ' + score);
-
-
 
                 }
             });

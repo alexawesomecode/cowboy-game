@@ -6,6 +6,7 @@ let dude2sprite;
 let king;
 let score;
 
+
 const GameLogic = function(thats) {
 
 
@@ -140,11 +141,17 @@ const GameLogic = function(thats) {
 
     }
 
-    function savedScore(total) {
+    function saveScore(total) {
 
         score = total;
-        return total;
 
+        return score;
+
+    }
+
+    function getScore() {
+
+        return score;
     }
 
     function createKing() {
@@ -165,7 +172,7 @@ const GameLogic = function(thats) {
 
     }
 
-    return { createCharacters, checkEnemVisibility, createKing, savedScore }
+    return { createCharacters, checkEnemVisibility, createKing, saveScore, getScore }
 
 
 }

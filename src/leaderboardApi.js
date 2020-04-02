@@ -62,7 +62,6 @@ const callApi = function() {
         };
         const resp = await fetch(url, configurations);
         const result = await resp.json();
-        console.log(result);
         return result.result;
 
     }

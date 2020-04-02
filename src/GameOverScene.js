@@ -1,7 +1,8 @@
 import callApi from './leaderboardApi.js'
 import GameLogic from './GameLogic'
 let rifle;
-
+let score;
+let allScores;
 
 class GameOverScene extends Phaser.Scene {
     constructor() {
@@ -35,6 +36,8 @@ class GameOverScene extends Phaser.Scene {
 
     create() {
 
+        allScores = callApi().getScore();
+
         let that = this;
         let buttonTest = this.add.sprite(400, 300, 'testButton');
         let text = 'These were skilled cowboys, BUT... \n Your BRAVERY will be recompensated.\n\n ';
@@ -62,9 +65,9 @@ class GameOverScene extends Phaser.Scene {
             rifle.play();
             let child = element.getChildByID('nameField')
             let userName = child.value
-            let score = GameLogic().savedScore();
-            that.scene.start('LeaderBoardScene');
+            score = GameLogic().getScore();
             userName !== '' ? callApi().submitScore(userName, score) : callApi().submitScore('Anonymous', score)
+            that.scene.start('LeaderBoardScene', { scores: allScores });
 
 
 
