@@ -1,4 +1,7 @@
 
+let scores;
+//import callApi from './leaderboardApi.js';
+
 class LeaderBoardScene extends Phaser.Scene {
  
   constructor() {
@@ -6,8 +9,8 @@ class LeaderBoardScene extends Phaser.Scene {
       key: 'LeaderBoardScene'
 
     });
- 
-      this.scores = [ {highScore: 10, name: 'alex'}];
+      
+      scores = [{user:"alex", score:10}, {user:"jess", score:100}]
   }
  
   preload() {
@@ -19,7 +22,7 @@ class LeaderBoardScene extends Phaser.Scene {
  
     for (let i = 1; i < 6; i++) {
       if (scores[i-1]) {
-        this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      ${scores[i-1].highScore}    ${scores[i-1].name}`).setTint(0xffffff);
+        this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      ${scores[i-1].score}    ${scores[i-1].user}`).setTint(0xffffff);
       } else {
         this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      0    ---`).setTint(0xffffff);
       }

@@ -47,9 +47,9 @@ preload() {
     this.load.image('king', 'assets/king.svg', { frameWidth: 32, frameHeight: 48 })
 
   this.load.audio('blues', 'assets/blues.ogg');
-    this.load.audio('pistol', 'assets/pistol.wav');
+  //  this.load.audio('pistol', 'assets/pistol.wav');
     this.load.audio('rifle', 'assets/rifle.wav');
-    this.load.audio('shotgun', 'assets/shotgun.wav');
+//    this.load.audio('shotgun', 'assets/shotgun.wav');
 
     }
  create() {
@@ -110,9 +110,9 @@ preload() {
      blues = this.sound.add('blues');
      blues.play();
 
-     rifle = this.audio.add('rifle');
-     shotgun = this.audio.add('shotgun');
-     pistol = this.audio.add('pistol');
+     rifle = this.sound.add('rifle');
+//     shotgun = this.sound.add('shotgun');
+  //   pistol = this.sound.add('pistol');
 
     }
 
@@ -144,12 +144,12 @@ preload() {
         bomb.setDisplaySize(65, 65);
        bomb.anims.play('expl', true)
        if (rand < 0.21) rifle.play();
-       if (rand > 0.91) shotgun.play();
+       if (rand > 0.91) rifle.play();
 
     }
 
 
-
+//
 
  update() {
         let pointerIsFree;

@@ -96,7 +96,7 @@ let windowEnemies = function(thats) {
         } else {
 
             elem.visible = true;
-            if (rand > 0.92) callKing();
+            if (rand > 0.80) callKing();
         }
     }
    

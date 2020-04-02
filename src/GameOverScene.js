@@ -1,6 +1,6 @@
 
 import GameScene from './GameScene';
-let rifle, pistol, shotgun;
+let rifle;
 class GameOverScene extends Phaser.Scene {
   constructor() {
     super({ key: 'GameOverScene' });
@@ -26,14 +26,14 @@ class GameOverScene extends Phaser.Scene {
             yoyo: true
         });
 
-    this.load.audio('pistol', 'assets/pistol.wav');
+
     this.load.audio('rifle', 'assets/rifle.wav');
-    this.load.audio('shotgun', 'assets/shotgun.wav');
+	this.load.html('nameform', 'assets/nameform.html');
       
 	
 }
 
-         
+//         
     showExplosion(x, y) {
 	let bombs = this.physics.add.group()
         let bomb = bombs.create(x, y, 'bombExplosion');
@@ -45,13 +45,8 @@ class GameOverScene extends Phaser.Scene {
 
     create() {
 
-	rifle = this.audio.add('rifle')
+	rifle = this.sound.add('rifle')
 	rifle.play();
-	pistol = this.audio.add('pistol')
-	pistol.play();
-
-	shotgun = this.audio.add('shotgun')
-	shotgun.play();
 	
 	let that = this;
 	let  buttonTest = this.add.sprite(400,300,'testButton');
@@ -61,18 +56,18 @@ class GameOverScene extends Phaser.Scene {
 	    
 	    if (pointer.isDown)
 		console.log('down');
+	    rifle.play();
 	    that.scene.start('LeaderBoardScene');
 
 	})
 
 	this.add.text(380,280, "SUBMIT", {font: "36px Arial"})
-	let text = "Tnese were skilled cowboys, but you GAVE it ALL.\n. Your BRAVERY will be recompensated.\n Enter your name";
+	let text = 'These were skilled cowboys, BUT... \n Your BRAVERY will be recompensated.\n Enter your name';
 	let welcomeGuy = this.add.sprite(300,550, 'dude1');
-//	let cloudsBox = this.add.sprite(200, 200, 'clouds');
-	welcomeGuy.setDisplaySize(400,400);
-//	this.add.text(202, 200, text, { fontFamily: "Roboto Condensed", backgroundColor: "#fff"});
 
-	
+	welcomeGuy.setDisplaySize(400,400);
+
+
 	this.add.text(100, 100, text,  { font: "27px Arial", fill: '#ffffff', backgroundColor: '#000000' });
 
 	this.anims.create({
@@ -84,8 +79,33 @@ class GameOverScene extends Phaser.Scene {
 
         });
 
-    
-    }
+
+
+var element = this.add.dom(400, 0).createFromCache('nameform');
+
+    element.addListener('click');
+
+    element.on('click', function (event) {
+
+        if (event.target.name === 'playButton')
+        {
+            var inputText = this.getChildByName('nameField');
+
+            //  Have they entered anything?
+            if (inputText.value !== '')
+            {
+                //  Turn off the click events
+                this.removeListener('click');
+
+                //  Hide the login element
+                this.setVisible(false);
+
+                //  Populate the text with whatever they typed in
+                text.setText('Welcome ' + inputText.value);
+            }    
+	}
+    });
+ }
 
 
 update() {

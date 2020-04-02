@@ -22,5 +22,13 @@
   },
   "dependencies": {
     "node-fetch": "^2.6.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexawesomecode/cowboy-game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexawesomecode/cowboy-game/issues"
+  },
+  "homepage": "https://github.com/alexawesomecode/cowboy-game#readme"
 }
