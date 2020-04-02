@@ -1,26 +1,22 @@
+import Characters from './GameLogic';
 
-import windowEnemies from './Enemy';
 
-       
-      let platforms;
-      let score = 0;
-      let scoreText;
-      let bombs;
-      let bomb;
-      let gameOver = false;
+let platforms;
+let score = 0;
+let scoreText;
+let bombs;
+let bomb;
 let that;
 let rifle;
-let shotgun;
-let pistol;
 let blues;
 class GameScene extends Phaser.Scene {
-  constructor() {
-      super({ key: 'GameScene' });
-  }
+    constructor() {
+        super({ key: 'GameScene' });
+    }
 
 
-preload() {
-       
+    preload() {
+
         this.load.image('dude1', 'assets/cowboy/sprite_05.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude2', 'assets/cowboy/sprite_06.png', { frameWidth: 32, frameHeight: 48 })
         this.load.image('dude3', 'assets/cowboy/sprite_07.png', { frameWidth: 32, frameHeight: 48 })
@@ -43,16 +39,16 @@ preload() {
 
         this.load.spritesheet('bombExplosion', 'assets/Explosion.png', { frameWidth: 96, frameHeight: 96 });
         this.load.image('ground', 'assets/platform.png');
- this.load.image('salon', './assets/transparent.png');
-    this.load.image('king', 'assets/king.svg', { frameWidth: 32, frameHeight: 48 })
+        this.load.image('salon', './assets/transparent.png');
+        this.load.image('king', 'assets/king.svg', { frameWidth: 32, frameHeight: 48 })
 
-  this.load.audio('blues', 'assets/blues.ogg');
-  //  this.load.audio('pistol', 'assets/pistol.wav');
-    this.load.audio('rifle', 'assets/rifle.wav');
-//    this.load.audio('shotgun', 'assets/shotgun.wav');
+        this.load.audio('blues', 'assets/blues.ogg');
+        //  this.load.audio('pistol', 'assets/pistol.wav');
+        this.load.audio('rifle', 'assets/rifle.wav');
+        //    this.load.audio('shotgun', 'assets/shotgun.wav');
 
     }
- create() {
+    create() {
 
         platforms = this.physics.add.staticGroup();
         platforms.create(600, 510, 'ground');
@@ -103,21 +99,21 @@ preload() {
 
         bombs = this.physics.add.group();
 
-        const { robotsprite, dudesprite, dude3sprite, dude4sprite } = windowEnemies(that).createCharacters();
-        windowEnemies(that).createKing()
+        const { robotsprite, dudesprite, dude3sprite, dude4sprite } = Characters(that).createCharacters();
+        Characters(that).createKing()
 
         this.setScore([robotsprite, dudesprite, dude3sprite, dude4sprite])
-     blues = this.sound.add('blues');
-     blues.play();
+        blues = this.sound.add('blues');
+        blues.play();
 
-     rifle = this.sound.add('rifle');
-//     shotgun = this.sound.add('shotgun');
-  //   pistol = this.sound.add('pistol');
+        rifle = this.sound.add('rifle');
+        //     shotgun = this.sound.add('shotgun');
+        //   pistol = this.sound.add('pistol');
 
     }
 
 
-     setScore(arr) {
+    setScore(arr) {
 
         arr.forEach((enem) => {
             console.log(enem)
@@ -136,22 +132,20 @@ preload() {
 
     }
 
-   showExplosion(x, y) {
+    showExplosion(x, y) {
 
 
-       const rand = Math.random();
+        const rand = Math.random();
         bomb = bombs.create(x, y, 'bombExplosion');
         bomb.setDisplaySize(65, 65);
-       bomb.anims.play('expl', true)
-       if (rand < 0.21) rifle.play();
-       if (rand > 0.91) rifle.play();
+        bomb.anims.play('expl', true)
+        if (rand < 0.21) rifle.play();
+        if (rand > 0.91) rifle.play();
 
     }
 
 
-//
-
- update() {
+    update() {
         let pointerIsFree;
         let pointer = this.input.activePointer;
         that = this;
@@ -161,11 +155,11 @@ preload() {
             let touchX = pointer.x;
             let touchY = pointer.y;
             this.showExplosion(touchX, touchY)
-            windowEnemies(that).checkEnemVisibility();
+            Characters(that).checkEnemVisibility();
             pointerIsFree = false;
         }
 
- }
+    }
 }
 export default GameScene;
 //

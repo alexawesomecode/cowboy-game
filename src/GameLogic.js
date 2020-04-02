@@ -1,4 +1,3 @@
-//
 let robotsprite;
 let dudesprite;
 let dude3sprite;
@@ -6,7 +5,7 @@ let dude4sprite;
 let dude2sprite;
 let king;
 
-let windowEnemies = function(thats) {
+const Characters = function(thats) {
 
 
     let that = thats;
@@ -19,8 +18,6 @@ let windowEnemies = function(thats) {
         dude3sprite = that.add.sprite(550, 210, 'baddude-3-2')
         dude4sprite = that.add.sprite(200, 410, 'baddude-3-1')
         dude2sprite = that.add.sprite(300, 210, 'baddude-4-1')
-
-        //
 
         robotsprite.setDisplaySize(200, 200);
         robotsprite.setInteractive();
@@ -99,13 +96,13 @@ let windowEnemies = function(thats) {
             if (rand > 0.80) callKing();
         }
     }
-   
+
     function callKing() {
-	let xPosition = Phaser.Math.Between(100,700);
-	let yPosition = Phaser.Math.Between(50,550)
-	king.x = xPosition;
-	king.y = yPosition;
-	
+        let xPosition = Phaser.Math.Between(100, 700);
+        let yPosition = Phaser.Math.Between(50, 550)
+        king.x = xPosition;
+        king.y = yPosition;
+
         if (king.visible == false) king.visible = true;
         else { king.visible = false }
 
@@ -131,16 +128,17 @@ let windowEnemies = function(thats) {
 
     function overNextScene() {
 
-   	    console.log('gameover')
-	    that.scene.start('GameOverScene');
+        console.log('gameover')
+        that.scene.start('GameOverScene');
     }
 
     function gameOver() {
 
-	that.add.text(400, 300, "Game Over",  { font: "47px Arial", fill: '#ffffff', backgroundColor: '#000000' });
-	setTimeout(overNextScene, 2300);
+        that.add.text(400, 300, "Game Over", { font: "47px Arial", fill: '#ffffff', backgroundColor: '#000000' });
+        setTimeout(overNextScene, 2300);
 
     }
+
     function createKing() {
 
         king = that.add.image(300, 200, 'king');
@@ -151,9 +149,9 @@ let windowEnemies = function(thats) {
             if (pointer.isDown) {
 
                 king.setTint(0xff0000);
-		
+
                 that.scene.pause();
-		gameOver();
+                gameOver();
 
             }
         });
@@ -165,4 +163,4 @@ let windowEnemies = function(thats) {
 
 }
 
-export default windowEnemies;
+export default Characters;
