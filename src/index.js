@@ -18,8 +18,8 @@ var config = {
 
         }
     },
-    //scene: [GameScene, GameOverScene, LeaderBoardScene]
-    scene: [GameOverScene]
+    scene: [GameScene, GameOverScene, LeaderBoardScene]
+        //scene: [GameOverScene]
 };
 
 let game = new Phaser.Game(config);
