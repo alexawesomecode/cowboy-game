@@ -1,5 +1,7 @@
 import callApi from './leaderboardApi.js'
+import GameLogic from './GameLogic'
 let rifle;
+
 
 class GameOverScene extends Phaser.Scene {
     constructor() {
@@ -60,8 +62,9 @@ class GameOverScene extends Phaser.Scene {
             rifle.play();
             let child = element.getChildByID('nameField')
             let userName = child.value
+            let score = GameLogic().savedScore();
             that.scene.start('LeaderBoardScene');
-            userName !== '' ? callApi().submitScore(userName, 23) : callApi().submitScore('Anonymous', 2)
+            userName !== '' ? callApi().submitScore(userName, score) : callApi().submitScore('Anonymous', score)
 
 
 

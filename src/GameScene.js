@@ -1,4 +1,4 @@
-import Characters from './GameLogic';
+import GameLogic from './GameLogic';
 
 
 let platforms;
@@ -99,8 +99,8 @@ class GameScene extends Phaser.Scene {
 
         bombs = this.physics.add.group();
 
-        const { robotsprite, dudesprite, dude3sprite, dude4sprite } = Characters(that).createCharacters();
-        Characters(that).createKing()
+        const { robotsprite, dudesprite, dude3sprite, dude4sprite } = GameLogic(that).createCharacters();
+        GameLogic(that).createKing()
 
         this.setScore([robotsprite, dudesprite, dude3sprite, dude4sprite])
         blues = this.sound.add('blues');
@@ -120,6 +120,7 @@ class GameScene extends Phaser.Scene {
             enem.on('pointerdown', function(pointer) {
                 if (pointer.isDown) {
                     score += 5
+                    GameLogic().savedScore(score)
                     scoreText.setText('Score: ' + score);
 
 
@@ -155,7 +156,7 @@ class GameScene extends Phaser.Scene {
             let touchX = pointer.x;
             let touchY = pointer.y;
             this.showExplosion(touchX, touchY)
-            Characters(that).checkEnemVisibility();
+            GameLogic(that).checkEnemVisibility();
             pointerIsFree = false;
         }
 

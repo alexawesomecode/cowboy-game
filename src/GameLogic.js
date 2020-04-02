@@ -4,8 +4,9 @@ let dude3sprite;
 let dude4sprite;
 let dude2sprite;
 let king;
+let score;
 
-const Characters = function(thats) {
+const GameLogic = function(thats) {
 
 
     let that = thats;
@@ -139,6 +140,13 @@ const Characters = function(thats) {
 
     }
 
+    function savedScore(total) {
+
+        score = total;
+        return total;
+
+    }
+
     function createKing() {
 
         king = that.add.image(300, 200, 'king');
@@ -157,9 +165,9 @@ const Characters = function(thats) {
 
     }
 
-    return { createCharacters, checkEnemVisibility, createKing }
+    return { createCharacters, checkEnemVisibility, createKing, savedScore }
 
 
 }
 
-export default Characters;
+export default GameLogic;

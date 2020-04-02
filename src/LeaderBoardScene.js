@@ -1,5 +1,5 @@
 let scores;
-//import callApi from './leaderboardApi.js';
+import callApi from './leaderboardApi.js';
 
 class LeaderBoardScene extends Phaser.Scene {
 
@@ -9,7 +9,7 @@ class LeaderBoardScene extends Phaser.Scene {
 
         });
 
-        scores = [{ user: "alex", score: 10 }, { user: "jess", score: 100 }]
+        scores = callApi().getScore()
     }
 
     preload() {
