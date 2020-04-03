@@ -129,7 +129,7 @@ class GameScene extends Phaser.Scene {
     bomb = bombs.create(x, y, 'bombExplosion');
     bomb.setDisplaySize(65, 65);
     bomb.anims.play('expl', true);
-    if (rand < 0.21) rifle.play();
+//    if (rand < 0.21) rifle.play();
     if (rand > 0.91) rifle.play();
   }
 
