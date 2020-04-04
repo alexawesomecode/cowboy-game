@@ -1,5 +1,5 @@
+import Phaser from 'phaser';
 import GameLogic from './GameLogic';
-
 
 let platforms;
 let score = 0;
@@ -97,7 +97,10 @@ class GameScene extends Phaser.Scene {
     bombs = this.physics.add.group();
 
     const {
-      robotsprite, dudesprite, dude3sprite, dude4sprite,
+      robotsprite,
+      dudesprite,
+      dude3sprite,
+      dude4sprite,
     } = GameLogic(that).createCharacters();
     GameLogic(that).createKing();
 
@@ -106,18 +109,14 @@ class GameScene extends Phaser.Scene {
     blues.play();
 
     rifle = this.sound.add('rifle');
-    //     shotgun = this.sound.add('shotgun');
-    //   pistol = this.sound.add('pistol');
   }
 
 
   setScore(arr) {
     arr.forEach((enem) => {
-      console.log(enem);
       enem.on('pointerdown', (pointer) => {
         if (pointer.isDown) {
           score += 5;
-          console.log(GameLogic().saveScore(score));
           scoreText.setText(`Score: ${score}`);
         }
       });
@@ -129,13 +128,12 @@ class GameScene extends Phaser.Scene {
     bomb = bombs.create(x, y, 'bombExplosion');
     bomb.setDisplaySize(65, 65);
     bomb.anims.play('expl', true);
-//    if (rand < 0.21) rifle.play();
+    //    if (rand < 0.21) rifle.play();
     if (rand > 0.91) rifle.play();
   }
 
 
   update() {
-    let pointerIsFree;
     const pointer = this.input.activePointer;
     that = this;
 
@@ -144,7 +142,6 @@ class GameScene extends Phaser.Scene {
       const touchY = pointer.y;
       this.showExplosion(touchX, touchY);
       GameLogic(that).checkEnemVisibility();
-      pointerIsFree = false;
     }
   }
 }

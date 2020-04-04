@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 let robotsprite;
 let dudesprite;
 let dude3sprite;
@@ -7,8 +9,18 @@ let king;
 let score;
 
 
-const GameLogic = function (thats) {
+function GameLogic(thats) {
   const that = thats;
+
+  function callKing() {
+    const xPosition = Phaser.Math.Between(100, 700);
+    const yPosition = Phaser.Math.Between(50, 550);
+    king.x = xPosition;
+    king.y = yPosition;
+
+    if (king.visible === false) king.visible = true;
+    else { king.visible = false; }
+  }
 
 
   function createCharacters() {
@@ -38,54 +50,51 @@ const GameLogic = function (thats) {
     [robotsprite, dudesprite, dude3sprite, dude4sprite, dude2sprite].forEach((elem) => {
       elem.on('pointerdown', (pointer) => {
         if (pointer.isDown) {
-          elem.visible = false;
+          const element = elem;
+          element.visible = false;
         }
       });
     });
 
     return {
-      robotsprite, dudesprite, dude3sprite, dude4sprite, dude2sprite,
+      robotsprite,
+      dudesprite,
+      dude3sprite,
+      dude4sprite,
+      dude2sprite,
     };
   }
 
   function enemEnable(elem) {
     const rand = Math.random();
+    const element = elem;
     if (elem.texture.key === 'dude1') {
       if (dude4sprite.visible === false) {
-        elem.visible = false;
+        element.visible = false;
       } else {
-        elem.visible = true;
+        element.visible = true;
       }
     } else if (elem.texture.key === 'baddude-3-1') {
       if (dudesprite.visible === false) {
-        elem.visible = true;
+        element.visible = true;
       } else {
-        elem.visible = false;
+        element.visible = false;
       }
     } else if (elem.texture.key === 'robot-1') {
       if (rand > 0.51) {
-        if ((robotsprite.visible === false) && (king.visible == false)) {
-          elem.visible = true;
+        if ((robotsprite.visible === false) && (king.visible === false)) {
+          element.visible = true;
         }
       } else {
-        elem.visible = false;
+        element.visible = false;
         callKing();
       }
     } else {
-      elem.visible = true;
+      element.visible = true;
       if (rand > 0.80) callKing();
     }
   }
 
-  function callKing() {
-    const xPosition = Phaser.Math.Between(100, 700);
-    const yPosition = Phaser.Math.Between(50, 550);
-    king.x = xPosition;
-    king.y = yPosition;
-
-    if (king.visible == false) king.visible = true;
-    else { king.visible = false; }
-  }
 
   function checkEnemVisibility() {
     [robotsprite, dude3sprite, dudesprite, dude4sprite].forEach((elem) => {
@@ -134,8 +143,12 @@ const GameLogic = function (thats) {
   }
 
   return {
-    createCharacters, checkEnemVisibility, createKing, saveScore, getScore,
+    createCharacters,
+    checkEnemVisibility,
+    createKing,
+    saveScore,
+    getScore,
   };
-};
+}
 
 export default GameLogic;

@@ -1,9 +1,9 @@
-import callApi from './leaderboardApi.js';
+import Phaser from 'phaser';
+import callApi from './leaderboardApi';
 import GameLogic from './GameLogic';
 
 let rifle;
 let score;
-let allScores;
 
 class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -35,8 +35,6 @@ class GameOverScene extends Phaser.Scene {
 
 
   create() {
-    allScores = callApi().getScore();
-
     const that = this;
     const buttonTest = this.add.sprite(400, 300, 'testButton');
     const text = 'These were skilled cowboys, BUT... \n Your BRAVERY will be recompensated.\n\n ';
@@ -59,13 +57,13 @@ class GameOverScene extends Phaser.Scene {
 
     buttonTest.setDisplaySize(450, 100);
     buttonTest.setInteractive();
-    buttonTest.on('pointerdown', (pointer) => {
+    buttonTest.on('pointerdown', () => {
       rifle.play();
       const child = element.getChildByID('nameField');
       const userName = child.value;
       score = GameLogic().getScore();
-      userName !== '' ? callApi().submitScore(userName, score) : callApi().submitScore('Anonymous', score);
-      that.scene.start('LeaderBoardScene', { scores: allScores });
+      if (userName !== '') { callApi().submitScore(userName, score); } else { callApi().submitScore('Anonymous', score); }
+      that.scene.start('LeaderBoardScene');
     });
 
     this.add.text(350, 280, 'SUBMIT', { font: '36px Arial' });
