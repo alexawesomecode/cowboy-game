@@ -49,22 +49,16 @@ The rules of the game are: You have to free a playful king that was captured by 
 
 Once you kill the game, you get a chance to store your name:
 
-<p align="center">
 
-    <img src="assets/gameover.png" alt="Logo" width="480" height="480">
-</p>
+![gameover](assets/gameover.png)
 
 Then you can click the submit button, or better, shoot with your mouse!
 
 You get a list of players and their scores, a Leaderboard.
 
 
-<p align="center">
 
-    <img src="assets/leaderboard.png" alt="Logo" width="480" height="480">
-</p>
-
-
+![leaderboard](assets/leaderboard.png)
 
 
 # Validations
