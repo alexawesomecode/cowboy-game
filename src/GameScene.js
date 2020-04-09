@@ -104,7 +104,7 @@ class GameScene extends Phaser.Scene {
     } = GameLogic(that).createCharacters();
     GameLogic(that).createKing();
 
-    this.setScore([robotsprite, dudesprite, dude3sprite, dude4sprite]);
+    this.constructor.setScore([robotsprite, dudesprite, dude3sprite, dude4sprite]);
     blues = this.sound.add('blues');
     blues.play();
 
@@ -112,7 +112,7 @@ class GameScene extends Phaser.Scene {
   }
 
 
-  setScore(arr) {
+  static setScore(arr) {
     arr.forEach((enem) => {
       enem.on('pointerdown', (pointer) => {
         if (pointer.isDown) {
@@ -123,7 +123,7 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  showExplosion(x, y) {
+  static showExplosion(x, y) {
     const rand = Math.random();
     bomb = bombs.create(x, y, 'bombExplosion');
     bomb.setDisplaySize(65, 65);
@@ -140,7 +140,7 @@ class GameScene extends Phaser.Scene {
     if (pointer.isDown) {
       const touchX = pointer.x;
       const touchY = pointer.y;
-      this.showExplosion(touchX, touchY);
+      this.constructor.showExplosion(touchX, touchY);
       GameLogic(that).checkEnemVisibility();
     }
   }

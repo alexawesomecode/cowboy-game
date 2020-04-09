@@ -68,11 +68,16 @@ class GameOverScene extends Phaser.Scene {
 
     this.add.text(350, 280, 'SUBMIT', { font: '36px Arial' });
     this.add.text(100, 100, text, { font: '27px Arial', fill: '#ffffff', backgroundColor: '#000000' });
-  }
 
-
-  update() {
-
+    const keyObj = this.input.keyboard.addKey('enter'); // Get key object
+    keyObj.on('down', () => {
+      rifle.play();
+      const child = element.getChildByID('nameField');
+      const userName = child.value;
+      score = GameLogic().getScore();
+      if (userName !== '') { callApi().submitScore(userName, score); } else { callApi().submitScore('Anonymous', score); }
+      that.scene.start('LeaderBoardScene');
+    });
   }
 }
 
