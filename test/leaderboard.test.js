@@ -16,7 +16,7 @@ describe('test function methods', () => {
     test('getScore return array', () => {
         let callingApi = callApi().getScore();
         console.log(callingApi)
-        console.log(expect(typeof callingApi).toBe('object'))
+        console.log(expect(typeof callingApi).toBe('object  '))
 
     })
     test('getScore return array with keys of user and score', () => {

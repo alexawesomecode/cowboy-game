@@ -31,14 +31,18 @@
 
 A game project app built with Javascipt. This is part of the Javascript Curriculum of Microverse School. The goal behind this project is to build a shooter game with Phaser 3. The requirements are the ability to gain score, kills enemies, lo lose and get your score level saved to a leaderboard. Oh! And also to have fun!
 
-<p align="center">
 
-    <img src="assets/game.png" alt="Logo" width="700" height="480">
-</p>
+![game](assets/game.png)
+
+
+
+## Video commentary
+
+Here is video demostration of the game. I comment this while I am playing it.
+
+Go here: https://www.loom.com/share/55f6e17adf594a33a778f9c6f60b09f8
 
 ## Design
-
-
 This game was designed using Phaser 3. It contains three files for Scenes (Main Game Scene, Game Over Scene and Leaderboard Scene) and one file for the game logic called 'GameLogic.js'. The main purpose of this file is to create characters, handle the the characters logic, save the score and manage the Game Over logic.
 
 The rules of the game are: You have to free a playful king that was captured by some bad cowboys. You need to shoot at them and be very carefull not to kill king (he likes to jump all over the screen, he loves freedom and fun). If you touch the king you lose. 
