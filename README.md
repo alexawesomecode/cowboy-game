@@ -17,7 +17,7 @@
   </h3>
 
   <h3 align="center">
-	 Live Version link - https://alexawesomecode.github.io/cowboy-game
+	 Live Version link - https://fierce-cliffs-23219.herokuapp.com/
   </h3>
 
   <p align="center">
