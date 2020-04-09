@@ -9,7 +9,7 @@
 <br/>
 <p align="center">
   <a href="https://www.microverse.org/">
-    <img src="src/asset/microverse.png" alt="Logo" width="80" height="80">
+    <img src="assets/microverse.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">
@@ -31,6 +31,11 @@
 
 A game project app built with Javascipt. This is part of the Javascript Curriculum of Microverse School. The goal behind this project is to build a shooter game with Phaser 3. The requirements are the ability to gain score, kills enemies, lo lose and get your score level saved to a leaderboard. Oh! And also to have fun!
 
+<p align="center">
+
+    <img src="assets/game.png" alt="Logo" width="700" height="480">
+</p>
+
 ## Design
 
 
@@ -38,9 +43,24 @@ This game was designed using Phaser 3. It contains three files for Scenes (Main 
 
 The rules of the game are: You have to free a playful king that was captured by some bad cowboys. You need to shoot at them and be very carefull not to kill king (he likes to jump all over the screen, he loves freedom and fun). If you touch the king you lose. 
 
+Once you kill the game, you get a chance to store your name:
 
-## Snapshot
-<img src="src/asset/snapshot.jpg" alt="screenshot" width="800" height="500">
+<p align="center">
+
+    <img src="assets/gameover.png" alt="Logo" width="480" height="480">
+</p>
+
+Then you can click the submit button, or better, shoot with your mouse!
+
+You get a list of players and their scores, a Leaderboard.
+
+
+<p align="center">
+
+    <img src="assets/leaderboard.png" alt="Logo" width="480" height="480">
+</p>
+
+
 
 
 # Validations
