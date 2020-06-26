@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest --watch",
         "webpack": "webpack --watch",
+        "dev": "webpack && npm start"
         "start": "node server.js"
     },
     "keywords": [],
