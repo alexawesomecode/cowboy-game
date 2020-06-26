@@ -118,6 +118,9 @@ class GameScene extends Phaser.Scene {
         if (pointer.isDown) {
           score += 5;
           scoreText.setText(`Score: ${score}`);
+          localStorage.setItem('score', score);
+          console.log(parseInt(localStorage.getItem('score')))
+
         }
       });
     });

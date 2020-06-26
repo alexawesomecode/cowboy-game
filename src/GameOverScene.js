@@ -61,7 +61,7 @@ class GameOverScene extends Phaser.Scene {
       rifle.play();
       const child = element.getChildByID('nameField');
       const userName = child.value;
-      score = GameLogic().getScore();
+      score = GameLogic().getScore();   
       if (userName !== '') { callApi().submitScore(userName, score); } else { callApi().submitScore('Anonymous', score); }
       that.scene.start('LeaderBoardScene');
     });

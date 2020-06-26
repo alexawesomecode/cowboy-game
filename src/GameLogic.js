@@ -120,12 +120,13 @@ function GameLogic(thats) {
 
   function saveScore(total) {
     score = total;
-
+    console.log('saving score', score)
     return score;
   }
 
   function getScore() {
-    return score;
+    let localScore = parseInt(localStorage.getItem('score')) 
+    return localScore;
   }
 
   function createKing() {
