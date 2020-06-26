@@ -67,7 +67,7 @@ You get a list of players and their scores, a Leaderboard.
 
 # Get Started
 
-Download or clone this [repo here](https://github.com/alexawesomecode/cowboy-game). The run 'npm install' to install all the requirements and then open your browser, hit http://localhost:3000/build/index.html  and kill some bad guys!
+Download or clone this [repo here](https://github.com/alexawesomecode/cowboy-game). The run 'npm install' to install all the requirements. The run 'npm dev'. This will bundle webpack and start the server. Then  you can open your browser, hit http://localhost:3000/build/index.html  and kill some bad guys!
 
 # Built With
 
