@@ -16,12 +16,18 @@ class LeaderBoardScene extends Phaser.Scene {
   }
 
   async pullResults() {
-    scores = await callApi().getScore();
+    return await callApi().getScore();
   }
 
-  static fadeLeaderBoard(that) {
-    that.add.bitmapText(100, 110, 'arcade', 'RANK  SCORE   NAME').setTint(0xffffff);
 
+
+  static fadeLeaderBoard(that) {
+
+
+
+    that.add.bitmapText(100, 110, 'arcade', 'RANK  SCORE   NAME').setTint(0xffffff);
+    scores = callApi().sortResult(scores)
+    
     for (let i = 1; i < 6; i += 1) {
       if (scores[i - 1]) {
         that.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}     ${scores[i - 1].score}  ${scores[i - 1].user}`).setTint(0xffffff);
@@ -32,8 +38,9 @@ class LeaderBoardScene extends Phaser.Scene {
   }
 
   create() {
-    this.pullResults();
-    setTimeout(this.constructor.fadeLeaderBoard, 4300, this);
+    this.pullResults().then(r => (scores = r))
+    
+    setTimeout(this.constructor.fadeLeaderBoard, 4500, this);
   }
 }
 
