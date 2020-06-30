@@ -8,7 +8,6 @@ let dude2sprite;
 let king;
 let score;
 
-
 function GameLogic(thats) {
   const that = thats;
 
@@ -21,7 +20,6 @@ function GameLogic(thats) {
     if (king.visible === false) king.visible = true;
     else { king.visible = false; }
   }
-
 
   function createCharacters() {
     robotsprite = that.add.sprite(420, 395, 'robot-1').play('robot');
@@ -42,10 +40,8 @@ function GameLogic(thats) {
     dude3sprite.setDisplaySize(150, 150);
     dude3sprite.setInteractive();
 
-
     dude4sprite.setDisplaySize(150, 150);
     dude4sprite.setInteractive();
-
 
     [robotsprite, dudesprite, dude3sprite, dude4sprite, dude2sprite].forEach((elem) => {
       elem.on('pointerdown', (pointer) => {
@@ -95,7 +91,6 @@ function GameLogic(thats) {
     }
   }
 
-
   function checkEnemVisibility() {
     [robotsprite, dude3sprite, dudesprite, dude4sprite].forEach((elem) => {
       const rand = Math.random();
@@ -108,7 +103,6 @@ function GameLogic(thats) {
     });
   }
 
-
   function overNextScene() {
     that.scene.start('GameOverScene');
   }
@@ -120,12 +114,12 @@ function GameLogic(thats) {
 
   function saveScore(total) {
     score = total;
-    console.log('saving score', score)
+    console.log('saving score', score);
     return score;
   }
 
   function getScore() {
-    let localScore = parseInt(localStorage.getItem('score')) 
+    const localScore = parseInt(localStorage.getItem('score'));
     return localScore;
   }
 

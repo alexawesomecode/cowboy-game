@@ -28,11 +28,9 @@ class GameOverScene extends Phaser.Scene {
       yoyo: true,
     });
 
-
     this.load.audio('rifle', 'assets/rifle.wav');
     this.load.html('nameform', 'assets/nameform.html');
   }
-
 
   create() {
     const that = this;
@@ -54,14 +52,13 @@ class GameOverScene extends Phaser.Scene {
 
     });
 
-
     buttonTest.setDisplaySize(450, 100);
     buttonTest.setInteractive();
     buttonTest.on('pointerdown', () => {
       rifle.play();
       const child = element.getChildByID('nameField');
       const userName = child.value;
-      score = GameLogic().getScore();   
+      score = GameLogic().getScore();
       if (userName !== '') { callApi().submitScore(userName, score); } else { callApi().submitScore('Anonymous', score); }
       that.scene.start('LeaderBoardScene');
     });

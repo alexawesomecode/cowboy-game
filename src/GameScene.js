@@ -14,7 +14,6 @@ class GameScene extends Phaser.Scene {
     super({ key: 'GameScene' });
   }
 
-
   preload() {
     this.load.image('dude1', 'assets/cowboy/sprite_05.png', { frameWidth: 32, frameHeight: 48 });
     this.load.image('dude2', 'assets/cowboy/sprite_06.png', { frameWidth: 32, frameHeight: 48 });
@@ -26,7 +25,6 @@ class GameScene extends Phaser.Scene {
     this.load.image('baddude-2-1', 'assets/cowboy/sprite_19.png', { frameWidth: 32, frameHeight: 48 });
     this.load.image('baddude-2-2', 'assets/cowboy/sprite_20.png', { frameWidth: 32, frameHeight: 48 });
     this.load.image('baddude-2-3', 'assets/cowboy/sprite_21.png', { frameWidth: 32, frameHeight: 48 });
-
 
     this.load.image('baddude-3-1', 'assets/cowboy/sprite_09.png', { frameWidth: 32, frameHeight: 48 });
     this.load.image('baddude-3-2', 'assets/cowboy/sprite_10.png', { frameWidth: 32, frameHeight: 48 });
@@ -55,7 +53,6 @@ class GameScene extends Phaser.Scene {
 
     that = this;
 
-
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
 
     this.anims.create({
@@ -67,13 +64,11 @@ class GameScene extends Phaser.Scene {
 
     });
 
-
     this.anims.create({
       key: 'explosion',
       frames: [
         { key: 'dude1' },
         { key: 'dude2' },
-
 
       ],
       frameRate: 10,
@@ -86,7 +81,6 @@ class GameScene extends Phaser.Scene {
       frames: [
         { key: 'robot-1' },
         { key: 'robot-2' },
-
 
       ],
       frameRate: 2,
@@ -111,7 +105,6 @@ class GameScene extends Phaser.Scene {
     rifle = this.sound.add('rifle');
   }
 
-
   static setScore(arr) {
     arr.forEach((enem) => {
       enem.on('pointerdown', (pointer) => {
@@ -119,8 +112,7 @@ class GameScene extends Phaser.Scene {
           score += 5;
           scoreText.setText(`Score: ${score}`);
           localStorage.setItem('score', score);
-          console.log(parseInt(localStorage.getItem('score')))
-
+          console.log(parseInt(localStorage.getItem('score')));
         }
       });
     });
@@ -134,7 +126,6 @@ class GameScene extends Phaser.Scene {
     //    if (rand < 0.21) rifle.play();
     if (rand > 0.91) rifle.play();
   }
-
 
   update() {
     const pointer = this.input.activePointer;
