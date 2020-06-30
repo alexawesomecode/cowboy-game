@@ -10,13 +10,14 @@ describe('test function methods', () => {
 
     test('newGame object  cointains', () => {
         let callingApi = callApi().newGame();
-        expect(callingApi).toContain('New')
+        
+        expect(callingApi).toEqual({"msg": "game created"})
     })
 
     test('getScore return array', () => {
         let callingApi = callApi().getScore();
         console.log(callingApi)
-        console.log(expect(typeof callingApi).toBe('object  '))
+        console.log(expect(typeof callingApi).toBe('object'))
 
     })
     test('getScore return array with keys of user and score', () => {

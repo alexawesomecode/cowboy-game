@@ -1,74 +1,32 @@
-import fetch from 'node-fetch';
+
 const callApi = function() {
     const newGame = () => {
-        const gameName = { name: 'Shoting Cowboys -- Save Playful King' };
-        const toPost = JSON.stringify(gameName);
-        const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games';
-        const configurations = {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-
-            body: toPost,
-        };
-
-
-        const resp = 'New Game Created'
-
-        const result = 'New Game Created';
-        return result;
+    
+        return {msg: "game created"};
     };
 
     const submitScore = (name, scores) => {
-        const submit = {
-            user: name,
-            score: scores,
-        };
-        const toPost = JSON.stringify(submit);
-        const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/y520svvYFiid3REAZGBI/scores/';
-        const configurations = {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
+        
+        if (typeof scores == Number) {
 
-            body: toPost,
-        };
-
-
-        const resp = { result: 'Leaderboard score created correctly' }
-
-        const result = resp;
-
-        return result;
+            return {"msg": "success"}
+        }
+        else { return { "msg": "error"} }
+        
     };
+
+    const sortResult = (arr) => {
+
+        return arr.sort(function (a, b) {return b.score - a.score})
+  
+      }
 
     const getScore = () => {
-        const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/y520svvYFiid3REAZGBI/scores/';
-        const configurations = {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-        };
-
-        const resp = [
-            { user: 'jack dorsey', score: 450 },
-            { user: 'linus', score: 240 },
-            { user: 'alex', score: 200 },
-            { user: 'jack dorsey', score: 350 },
-            { score: 50, user: 'mark' }
-        ]
-
-        const result = resp;
-
-        return result;
+        
+             
+            return [{user: 'alex', score:123}]
     };
 
-    return { newGame, getScore, submitScore };
+    return { newGame, getScore, submitScore, sortResult };
 };
 export default callApi;
