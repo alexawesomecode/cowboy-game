@@ -112,7 +112,6 @@ class GameScene extends Phaser.Scene {
           score += 5;
           scoreText.setText(`Score: ${score}`);
           localStorage.setItem('score', score);
-          console.log(parseInt(localStorage.getItem('score')));
         }
       });
     });

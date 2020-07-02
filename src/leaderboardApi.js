@@ -1,5 +1,4 @@
-// const fetch = require('node-fetch')
-const callApi = function () {
+const callApi = () => {
   const newGame = async () => {
     const gameName = { name: 'Shoting Cowboys -- Save Playful King #2' };
     const toPost = JSON.stringify(gameName);

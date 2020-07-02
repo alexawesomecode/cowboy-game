@@ -114,12 +114,11 @@ function GameLogic(thats) {
 
   function saveScore(total) {
     score = total;
-    console.log('saving score', score);
     return score;
   }
 
   function getScore() {
-    const localScore = parseInt(localStorage.getItem('score'));
+    const localScore = parseInt(localStorage.getItem('score'), 10);
     return localScore;
   }
 

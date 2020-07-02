@@ -15,8 +15,8 @@ class LeaderBoardScene extends Phaser.Scene {
     this.load.bitmapFont('arcade', 'assets/arcade.png', 'assets/arcade.xml');
   }
 
-  async pullResults() {
-    return await callApi().getScore();
+  static pullResults() {
+    return callApi().getScore();
   }
 
   static fadeLeaderBoard(that) {
@@ -33,7 +33,10 @@ class LeaderBoardScene extends Phaser.Scene {
   }
 
   create() {
-    this.pullResults().then((r) => (scores = r));
+    this.pullResults().then((r) => {
+      scores = r;
+      return 'success';
+    });
 
     setTimeout(this.constructor.fadeLeaderBoard, 4500, this);
   }
