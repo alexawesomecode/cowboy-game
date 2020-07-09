@@ -5,7 +5,6 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-#Cowboy Shooter Game (js project)
 <br/>
 <p align="center">
   <a href="https://www.microverse.org/">
@@ -13,7 +12,7 @@
   </a>
 
   <h3 align="center">
-    The last project from the Microverse Javascript Curriculum
+	Cowboy Sooter
   </h3>
 
   <h3 align="center">
@@ -21,13 +20,13 @@
   </h3>
 
   <p align="center">
- A capstone shooter game from Microverse</a>
+	A cowboy shooter game built with Phaser 3
     <br />
 
   </p>
 </p>
 
-## Project 'Cowboy Shooter Game'
+## Project 
 
 A game project app built with Javascipt. This is part of the Javascript Curriculum of Microverse School. The goal behind this project is to build a shooter game with Phaser 3. The requirements are the ability to gain score, kills enemies, lo lose and get your score level saved to a leaderboard. Oh! And also to have fun!
 
