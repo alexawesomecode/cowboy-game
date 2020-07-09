@@ -12,7 +12,7 @@
   </a>
 
   <h3 align="center">
-	Cowboy Sooter
+	Cowboy Sooter Game
   </h3>
 
   <h3 align="center">
@@ -28,7 +28,7 @@
 
 ## Project 
 
-A game project app built with Javascipt. This is part of the Javascript Curriculum of Microverse School. The goal behind this project is to build a shooter game with Phaser 3. The requirements are the ability to gain score, kills enemies, lo lose and get your score level saved to a leaderboard. Oh! And also to have fun!
+A game project app built with Javascipt using Phaser 3 Framework. The goal behind this project is to build a shooter game with Phaser 3. The requirements are the ability to gain score, kills enemies, lo lose and get your score level saved to a leaderboard. Oh! And also to have fun!
 
 
 ![game](assets/game.png)
