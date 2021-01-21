@@ -42,7 +42,7 @@
         "babel-preset-env": "^1.7.0",
         "copy-webpack-plugin": "^5.1.1",
         "express": "^4.15.2",
-        "socket.io": "^1.7.3"
+        "socket.io": "^2.4.0"
     },
     "repository": {
         "type": "git",
